@@ -77,6 +77,14 @@ case $(uname -s) in
                 ;;
 	    esac
         ;;
+    MINGW64*ARM64)
+        echo 'uname -s identifies an MSYS2 aarch64 environment.'
+        IS_MSYS2=1
+        # Cygwin/MSYS G++ compiler is not available in Windows Arm64; use the MINGW one instead,
+        # with the expectation that the Unix adapter program 'winpty.exe' will fail to build.
+        UNIX_CXX=aarch64-w64-mingw32-g++
+        MINGW_CXX=aarch64-w64-mingw32-g++
+        ;;
     MSYS*|MINGW*)
         # MSYS2 notes:
         #  - MSYS2 offers two shortcuts to open an environment:
